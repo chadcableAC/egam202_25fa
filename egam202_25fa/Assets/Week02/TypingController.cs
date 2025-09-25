@@ -9,6 +9,16 @@ public class TypingController : MonoBehaviour
         var keyboard = Keyboard.current;
         if (keyboard != null)
         {
+            // Listen for a specific key (Like A)
+            if (keyboard.aKey.wasPressedThisFrame)
+            {
+                Debug.Log("A pressed!");
+            }
+
+            var aa = keyboard.aKey.wasReleasedThisFrame;
+            var aaa = keyboard.aKey.isPressed;
+
+            // Listen for ANY key
             foreach (var key in keyboard.allKeys)
             {
                 if (key != null &&
