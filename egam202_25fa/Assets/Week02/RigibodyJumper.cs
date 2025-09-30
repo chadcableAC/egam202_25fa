@@ -20,7 +20,7 @@ public class RigibodyJumper : MonoBehaviour
         jumpAction = InputSystem.actions.FindAction("Jump");
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // Jump action
         if (jumpAction.WasPressedThisFrame())        
@@ -40,5 +40,10 @@ public class RigibodyJumper : MonoBehaviour
         Vector3 newVelocity = moveDirection * moveStrength;
         newVelocity.y = myRb.linearVelocity.y;
         myRb.linearVelocity = newVelocity;
+    }
+
+    void FixedUpdate()
+    {
+        
     }
 }
