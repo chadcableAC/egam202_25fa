@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ClickManager : MonoBehaviour
+public class PopManager : MonoBehaviour
 {
+    // Update is called once per frame
     void Update()
     {
         var mouse = Mouse.current;
@@ -17,23 +18,15 @@ public class ClickManager : MonoBehaviour
             // On a mouse click...
             if (mouse.leftButton.wasPressedThisFrame)
             {
-                // Creates a mask that ONLY sees the Unclickable layer
-                LayerMask layerMask = 1 << LayerMask.NameToLayer("Unclickable");
-
-                // "Invert" to see everythign EXCEPT the Unclickable layer
-                layerMask = ~layerMask;
-
                 // Send a "raycast" to see what we hit / collide with
                 RaycastHit hit;
-                if (Physics.Raycast(worldRay, out hit, Mathf.Infinity, layerMask))
+                if (Physics.Raycast(worldRay, out hit))
                 {
-                    Debug.Log(hit.transform.name);
-
                     // Is this object a ClickableObject?
-                    ClickableObject clickable = hit.transform.GetComponent<ClickableObject>();
-                    if (clickable)
+                    PopObject pop = hit.transform.GetComponent<PopObject>();
+                    if (pop)
                     {
-                        clickable.OnClick();
+                        pop.Popped();
                     }
                 }
             }
